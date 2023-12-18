@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">TugasPertemuan5</string>
+    // Main_Activity, Second_Activity
+    <string name="regis">Register</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="password">Password</string>
+    <string name="checking">By checking the box you agree to our </string>
+    <string name="terms">Terms </string>
+    <string name="and">and </string>
+    <string name="conditions">Conditions</string>
+    <string name="readyAccount">Already Have an Account?</string>
+    <string name="login">Log in</string>
+    <string name="homepage">Homepage</string>
+    <string name="welcome">Welcome</string>
+    <string name="your">Your</string>
+    <string name="hasbeen">has been activated</string>
+    <string name="email2">email</string>
+    <string name="phone2">phone</string>
+    <string name="your2">Your</string>
+    <string name="hasbeen2">has been registered</string>
+    <string name="login2">Login</string>
+    <string name="rememberme">Remember Me</string>
+    <string name="forgetpw">Forget Password ?</string>
+    <string name="newmember">New Member?</string>
+
+    // Third_Activity
+    <string name="dari">Dari</string>
+    <string name="ke">Ke</string>
+    <string name="tiket">Rencana Perjalanan</string>
+    <string name="pergipulang">Pergi/Pulang</string>
+    <string name="multikota">Multi-kota</string>
+    <string name="dari_stasiun">Stasiun</string>
+    <string name="ke_stasiun">Ke Stasiun</string>
+    <string name="dari_daerah">Daerah</string>
+    <string name="ke_daerah">Ke Daerah</string>
+    <string name="tgl_berangkat">Tanggal Berangkat</string>
+    <string name="waktu_berangkat">Waktu Berangkat</string>
+    <string name="penumpang">Penumpang</string>
+    <string name="kelas_penerbangan">Kelas Penerbangan</string>
+    <string name="pesan">Pesan</string>
+
+    <array name="passengers">
+        <item>1 penumpang</item>
+        <item>2 penumpang</item>
+        <item>3 penumpang</item>
+    </array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
