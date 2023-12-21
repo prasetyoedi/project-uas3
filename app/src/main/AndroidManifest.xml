@@ -14,7 +14,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".LoginRegisterActivity"
+            android:name=".activity.LoginRegisterActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,40 +24,40 @@
         </activity>
 
         <activity
-            android:name=".NavigationActivity"
+            android:name=".activity.NavigationActivity"
             android:exported="false" />
 
         <activity
-            android:name=".HomeAdminActivity"
-            android:exported="false" />
-
+            android:name=".activity.HomeAdminActivity"
+            android:exported="false"
+            android:theme="@style/Base.Theme.Projectuas3.WithActionBar"/>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.OrderActivity"
             android:exported="true">
         </activity>
 
         <activity
-            android:name=".ProfileFragment"
+            android:name=".activity.MainActivity"
             android:exported="true">
         </activity>
 
         <activity
-            android:name=".EditAdminActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".AddAdminActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".OrderActivity"
-            android:label="@string/app_name">
+            android:name=".fragment.ProfileFragment"
+            android:exported="true">
         </activity>
 
         <activity
-            android:name=".HistoryOrderFragment"
-            android:label="@string/app_name">
+            android:name=".activity.EditAdminActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".activity.AddAdminActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".fragment.HistoryOrderFragment"
+            android:exported="true">
         </activity>
 
     </application>

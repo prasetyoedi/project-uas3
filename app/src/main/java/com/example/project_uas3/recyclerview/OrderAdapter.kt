@@ -1,10 +1,14 @@
-package com.example.project_uas3
+package com.example.project_uas3.recyclerview
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.project_uas3.database.model.OrderData
+import com.example.project_uas3.R
 
 class OrderAdapter(private val orderList: MutableList<OrderData>) :
     RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
@@ -15,6 +19,7 @@ class OrderAdapter(private val orderList: MutableList<OrderData>) :
         val endTextView: TextView = itemView.findViewById(R.id.end_station_order)
         val priceTextView: TextView = itemView.findViewById(R.id.price_order)
         val dateTextView: TextView = itemView.findViewById(R.id.datepicker_order)
+        val imageView: ImageView = itemView.findViewById(R.id.image_film_historyorder)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
@@ -31,14 +36,19 @@ class OrderAdapter(private val orderList: MutableList<OrderData>) :
         holder.endTextView.text = currentOrder.end
         holder.priceTextView.text = currentOrder.price
         holder.dateTextView.text = currentOrder.date
+        // Load image using Glide or your preferred image loading library
+        Glide.with(holder.imageView.context)
+            .load(currentOrder.imageUrl)
+            .into(holder.imageView)
     }
 
     override fun getItemCount(): Int {
         return orderList.size
     }
 
-    fun addOrder(order: OrderData) {
-        orderList.add(order)
-        notifyItemInserted(orderList.size - 1)
+    fun addOrders(orders: List<OrderData>) {
+        orderList.clear()
+        orderList.addAll(orders)
+        notifyDataSetChanged()
     }
 }

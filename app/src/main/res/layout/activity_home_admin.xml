@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/blue"
-    tools:context=".HomeAdminActivity">
+    tools:context=".activity.HomeAdminActivity">
 
     <LinearLayout
         app:layout_constraintStart_toStartOf="parent"

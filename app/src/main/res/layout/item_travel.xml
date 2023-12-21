@@ -36,7 +36,7 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="70dp"
+                android:layout_height="100dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -59,6 +59,16 @@
                     android:text="End Stasion"
                     android:textSize="14dp" />
 
+                <TextView
+                    android:id="@+id/price_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/poppinsmedium"
+                    android:text="Price"
+                    android:textSize="14dp" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -73,12 +83,19 @@
                     android:layout_marginLeft="20dp"
                     android:background="@drawable/star"/>
 
-                <ImageButton
-                    android:id="@+id/hearth"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="40dp"
-                    android:background="@drawable/baseline_person_add_alt_1_24"/>
+                <ToggleButton
+                    android:id="@+id/btn_fav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinssemibold"
+                    android:backgroundTint="#F48FB1"
+                    android:textColor="@color/white"
+                    android:paddingHorizontal="16dp"
+                    android:textSize="12sp"
+                    android:textAllCaps="false"
+                    android:textOn="Hapus Dav"
+                    android:textOff="Tambahkan Fav"
+                    />
             </LinearLayout>
         </LinearLayout>
 

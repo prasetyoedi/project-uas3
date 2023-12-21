@@ -1,10 +1,17 @@
-package com.example.project_uas3
+package com.example.project_uas3.activity
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.project_uas3.R
+import com.example.project_uas3.recyclerview.TravelAdapter
+import com.example.project_uas3.database.model.TravelData
 import com.example.project_uas3.databinding.ActivityHomeAdminBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -17,8 +24,8 @@ class HomeAdminActivity : AppCompatActivity() {
     private lateinit var itemAdapter: TravelAdapter
     private lateinit var itemList: ArrayList<TravelData>
     private lateinit var recyclerViewItem: RecyclerView
-
     private lateinit var database: DatabaseReference
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +45,7 @@ class HomeAdminActivity : AppCompatActivity() {
         }
 
         database = FirebaseDatabase.getInstance().getReference("Travel")
+        sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 itemList.clear()
@@ -56,4 +64,29 @@ class HomeAdminActivity : AppCompatActivity() {
             }
         })
     }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_logout, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_logout -> {
+                // Handle logout
+                logoutAdmin()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+    private fun logoutAdmin() {
+        // Clear user data from SharedPreferences
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
+
+        val intent = Intent(this, LoginRegisterActivity::class.java)
+        startActivity(intent)
+    }
+
 }

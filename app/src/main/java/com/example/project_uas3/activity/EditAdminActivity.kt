@@ -1,26 +1,28 @@
-package com.example.project_uas3
+package com.example.project_uas3.activity
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.project_uas3.database.model.TravelData
 import com.example.project_uas3.databinding.ActivityEditAdminBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
-import java.util.UUID
 
 class EditAdminActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditAdminBinding
     private lateinit var database: DatabaseReference
     private lateinit var storageReference: StorageReference
-    private lateinit var imageUri: Uri
+    private var imageUri: Uri? = null
+    private var originalImageId: String? = null
 
     private val getContent =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
@@ -44,6 +46,22 @@ class EditAdminActivity : AppCompatActivity() {
         val end = binding.txtEndEdit
         val price = binding.txtPriceEdit
         val description = binding.txtDescriptionEdit
+
+        // Pengecekan apakah data ekstra dengan kunci yang diharapkan ada sebelum mengaksesnya
+        val uriString = intent.getStringExtra("imgId")
+
+        if (uriString != null) {
+            try {
+                // Pengecekan nilai uriString tidak null sebelum parsing Uri
+                originalImageId = Uri.parse(uriString).lastPathSegment?.removePrefix("images/")
+            } catch (e: Exception) {
+                // Handle jika terjadi kesalahan saat parsing Uri
+                Log.e("EditAdminActivity", "Error parsing Uri: ${e.message}")
+            }
+        } else {
+            // Handle jika uriString bernilai null atau key not found
+            Log.e("EditAdminActivity", "uriString is null or key not found")
+        }
 
         val originalImageUrl = intent.getStringExtra("imgId")
         Glide.with(this)
@@ -73,11 +91,8 @@ class EditAdminActivity : AppCompatActivity() {
         database = FirebaseDatabase.getInstance().getReference("Travel")
 
         if (imageUri != null) {
-            // Generate a unique ID for the image
-            val imageId = UUID.randomUUID().toString()
-
             // Upload image to Firebase Storage with the generated ID
-            storageReference = FirebaseStorage.getInstance().reference.child("images/$imageId")
+            storageReference = FirebaseStorage.getInstance().reference.child("images/$originalImageId")
             val uploadTask: UploadTask = storageReference.putFile(imageUri)
 
             uploadTask.addOnSuccessListener {
@@ -91,17 +106,11 @@ class EditAdminActivity : AppCompatActivity() {
                         updatedDescription,
                         imageUrl.toString()
                     )
-                    database.child(imageId).setValue(item)
+                    database.child(originalImageId!!).setValue(item)
                         .addOnCompleteListener {
+                            clearFieldsAndNavigateToHome()
                             // Handle completion, e.g., show a success message
                             Toast.makeText(this, "Data Uploaded Successfully", Toast.LENGTH_SHORT).show()
-
-                            // Start HomeAdminActivity after successful update
-                            val intent = Intent(this, HomeAdminActivity::class.java)
-                            startActivity(intent)
-
-                            // Finish current activity
-                            finish()
                         }
                         .addOnFailureListener {
                             Toast.makeText(this, "Adding Data Failed!", Toast.LENGTH_SHORT).show()
@@ -111,9 +120,6 @@ class EditAdminActivity : AppCompatActivity() {
                 Toast.makeText(this, "Image Upload Failed!", Toast.LENGTH_SHORT).show()
             }
         } else {
-            // If no new image is selected, update the data without uploading a new image
-            val imageId = intent.getStringExtra("imgId")!!
-
             val updatedList = mapOf(
                 "title" to updatedTitle,
                 "start" to updatedStart,
@@ -123,21 +129,25 @@ class EditAdminActivity : AppCompatActivity() {
             )
 
             // Update the data with the new title
-            database.child(imageId).updateChildren(updatedList)
+            database.child(originalImageId!!).updateChildren(updatedList)
                 .addOnCompleteListener {
+                    clearFieldsAndNavigateToHome()
                     // Handle completion, e.g., show a success message
                     Toast.makeText(this, "Data Updated Successfully", Toast.LENGTH_SHORT).show()
-
-                    // Start HomeAdminActivity after successful update
-                    val intent = Intent(this, HomeAdminActivity::class.java)
-                    startActivity(intent)
-
-                    // Finish current activity
-                    finish()
                 }
                 .addOnFailureListener {
                     Toast.makeText(this, "Updating Data Failed!", Toast.LENGTH_SHORT).show()
                 }
         }
+    }
+
+    private fun clearFieldsAndNavigateToHome() {
+        binding.txtTitleEdit.text!!.clear()
+        binding.txtStartEdit.text!!.clear()
+        binding.txtEndEdit.text!!.clear()
+        binding.txtPriceEdit.text!!.clear()
+        binding.txtDescriptionEdit.text!!.clear()
+        startActivity(Intent(this, HomeAdminActivity::class.java))
+        finish()
     }
 }

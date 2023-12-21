@@ -1,12 +1,12 @@
-package com.example.project_uas3
+package com.example.project_uas3.activity
 
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import com.example.project_uas3.database.model.TravelData
 import com.example.project_uas3.databinding.ActivityAddAdminBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -60,30 +60,28 @@ class AddAdminActivity : AppCompatActivity() {
 
             // Upload image to Firebase Storage with the generated ID
             storageReference = FirebaseStorage.getInstance().reference.child("images/$imageId")
-            val uploadTask: UploadTask = storageReference.putFile(imageUri)
+                val uploadTask: UploadTask = storageReference.putFile(imageUri)
 
             uploadTask.addOnSuccessListener {
                 // Image uploaded successfully, now get the download URL
                 storageReference.downloadUrl.addOnSuccessListener { imageUrl ->
-                    val item = TravelData(title, start, end, price, description, imageUrl.toString())
-                    database = FirebaseDatabase.getInstance().getReference("Travel")
-                    database.child(imageId).setValue(item)
-                        .addOnCompleteListener {
-                            binding.txtTitleAdmin.text!!.clear()
-                            binding.txtStartAdmin.text!!.clear()
-                            binding.txtEndAdmin.text!!.clear()
-                            binding.txtPriceAdmin.text!!.clear()
-                            binding.txtDescriptionAdmin.text!!.clear()
-                            Toast.makeText(this, "Data Uploaded Successfully", Toast.LENGTH_SHORT).show()
+                val item = TravelData(title, start, end, price, description, imageUrl.toString())
+                database = FirebaseDatabase.getInstance().getReference("Travel")
+                database.child(imageId).setValue(item)
+                    .addOnCompleteListener {
+                        binding.txtTitleAdmin.text!!.clear()
+                        binding.txtStartAdmin.text!!.clear()
+                        binding.txtEndAdmin.text!!.clear()
+                        binding.txtPriceAdmin.text!!.clear()
+                        binding.txtDescriptionAdmin.text!!.clear()
+                        Toast.makeText(this, "Data Uploaded Successfully", Toast.LENGTH_SHORT).show()
 
-                            Log.d("URIIII",imageUri.toString())
-                            Log.d("URIIII",imageUri.toString())
 
-                            // Navigate back to HomeAdminActivity
-                            val intent = Intent(this, HomeAdminActivity::class.java)
-                            startActivity(intent)
-                            finish() // Finish the current activity to prevent going back to it with the back button
-                        }
+                        // Navigate back to HomeAdminActivity
+                        val intent = Intent(this, HomeAdminActivity::class.java)
+                        startActivity(intent)
+                        finish() // Finish the current activity to prevent going back to it with the back button
+                    }
                         .addOnFailureListener {
                             Toast.makeText(this, "Adding Data Failed!", Toast.LENGTH_SHORT).show()
                         }

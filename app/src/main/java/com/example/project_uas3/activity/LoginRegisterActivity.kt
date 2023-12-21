@@ -1,10 +1,11 @@
-package com.example.project_uas3
+package com.example.project_uas3.activity
 
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.project_uas3.LoginRegisterAdapter
 import com.example.project_uas3.databinding.ActivityLoginRegisterBinding
 import com.google.android.material.tabs.TabLayoutMediator
 

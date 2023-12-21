@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/blue"
-    tools:context=".fragment.HistoryOrderFragment">
+    android:orientation="vertical"
+    tools:context=".fragment.FavoriteFragment">
 
     <LinearLayout
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/homeAdminLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
@@ -29,23 +24,22 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="History Order"
+            android:text="Favorite Travels"
             android:layout_gravity="center"
             android:fontFamily="@font/poppinssemibold"
             android:textColor="@color/white"
-            android:paddingLeft="90dp"
+            android:paddingLeft="85dp"
             android:paddingTop="5dp"
             android:textSize="18dp"/>
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/homeAdminLayout"
-        android:id="@+id/rv_order"
-        tools:listitem="@layout/item_orderview"
+        android:id="@+id/rv_favorite"
         android:layout_width="match_parent"
-        android:layout_height="0dp"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        tools:itemCount="2"
+        tools:listitem="@layout/item_favorite" />
+</LinearLayout>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>

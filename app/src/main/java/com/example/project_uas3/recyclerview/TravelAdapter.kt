@@ -1,4 +1,4 @@
-package com.example.project_uas3
+package com.example.project_uas3.recyclerview
 
 import android.content.Intent
 import android.net.Uri
@@ -10,6 +10,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.project_uas3.R
+import com.example.project_uas3.database.model.TravelData
+import com.example.project_uas3.activity.EditAdminActivity
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 
@@ -42,6 +46,8 @@ class TravelAdapter(private val travelAdminList: ArrayList<TravelData>) : Recycl
         // Use Glide or Picasso to load the image from the URL into the ImageView
         Glide.with(holder.itemView.context)
             .load(currentItem.imageUrl)
+            .skipMemoryCache(true) // Skip caching in memory
+            .diskCacheStrategy(DiskCacheStrategy.NONE) // Skip caching on disk
             .into(holder.image)
 
         holder.itemView.findViewById<ImageButton>(R.id.btn_edit).setOnClickListener{
@@ -52,7 +58,7 @@ class TravelAdapter(private val travelAdminList: ArrayList<TravelData>) : Recycl
             intent.putExtra("end", currentItem.end)
             intent.putExtra("price", currentItem.price)
             intent.putExtra("description", currentItem.description)
-            intent.putExtra("imageUrl", currentItem.imageUrl)
+            intent.putExtra("imgId", currentItem.imageUrl)
             holder.itemView.context.startActivity(intent)
         }
 
