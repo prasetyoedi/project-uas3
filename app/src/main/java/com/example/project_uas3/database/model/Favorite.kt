@@ -22,4 +22,6 @@ data class Favorite(
     var end: String = "",
     @ColumnInfo(name = "price")
     var price: String = ""
+
+
 )

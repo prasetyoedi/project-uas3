@@ -8,12 +8,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.project_uas3.Akun
-import com.example.project_uas3.R
+import com.example.project_uas3.database.model.Akun
 import com.example.project_uas3.activity.NavigationActivity
-import com.example.project_uas3.database.model.Favorite
 import com.example.project_uas3.databinding.FragmentFavoriteBinding
-import com.example.project_uas3.recyclerview.FavoriteAdapter
+import com.example.project_uas3.adapter.FavoriteAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.concurrent.Executors

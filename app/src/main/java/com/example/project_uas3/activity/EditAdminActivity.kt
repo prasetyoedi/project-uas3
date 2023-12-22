@@ -41,6 +41,10 @@ class EditAdminActivity : AppCompatActivity() {
             getContent.launch("image/*")
         }
 
+        binding.buttonBack.setOnClickListener{
+            onBackPressed()
+        }
+
         val title = binding.txtTitleEdit
         val start = binding.txtStartEdit
         val end = binding.txtEndEdit

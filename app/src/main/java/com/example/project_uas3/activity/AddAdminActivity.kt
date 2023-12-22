@@ -44,6 +44,10 @@ class AddAdminActivity : AppCompatActivity() {
             getContent.launch("image/*")
         }
 
+        binding.buttonBack.setOnClickListener{
+            onBackPressed()
+        }
+
     }
 
     private fun uploadData(imageUri: Uri? = null) {

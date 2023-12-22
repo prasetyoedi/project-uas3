@@ -1,4 +1,4 @@
-package com.example.project_uas3.recyclerview
+package com.example.project_uas3.adapter
 
 import android.view.LayoutInflater
 import android.view.View

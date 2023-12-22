@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,54 +16,44 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Projectuas3"
         tools:targetApi="31">
-
         <activity
-            android:name=".activity.LoginRegisterActivity"
+            android:name=".activity.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
+        <activity
+            android:name=".activity.LoginRegisterActivity"
+            android:exported="true">
+        </activity>
         <activity
             android:name=".activity.NavigationActivity"
             android:exported="false" />
-
         <activity
             android:name=".activity.HomeAdminActivity"
             android:exported="false"
-            android:theme="@style/Base.Theme.Projectuas3.WithActionBar"/>
-
+            android:theme="@style/Base.Theme.Projectuas3.WithActionBar" />
         <activity
             android:name=".activity.OrderActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".activity.MainActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".fragment.ProfileFragment"
-            android:exported="true">
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".activity.EditAdminActivity"
             android:exported="true" />
-
         <activity
             android:name=".activity.AddAdminActivity"
             android:exported="true" />
-
         <activity
             android:name=".fragment.HistoryOrderFragment"
-            android:exported="true">
-        </activity>
-
+            android:exported="true"></activity>
     </application>
 
 </manifest>

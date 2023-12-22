@@ -1,4 +1,4 @@
-package com.example.project_uas3
+package com.example.project_uas3.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project_uas3.R
 import com.example.project_uas3.database.model.OrderData
-import com.example.project_uas3.recyclerview.OrderAdapter
+import com.example.project_uas3.adapter.OrderAdapter
 import com.google.firebase.database.*
 
 class HistoryOrderFragment : Fragment() {

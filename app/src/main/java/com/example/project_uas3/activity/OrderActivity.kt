@@ -1,14 +1,19 @@
 package com.example.project_uas3.activity
 
 import android.app.DatePickerDialog
+import android.app.NotificationManager
+import android.content.Context
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import com.bumptech.glide.Glide
 import com.example.project_uas3.database.model.OrderData
 import com.example.project_uas3.R
+import com.example.project_uas3.databinding.ActivityOrderBinding
 import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
 import java.util.*
@@ -17,10 +22,17 @@ class OrderActivity : AppCompatActivity() {
 
     private lateinit var orderData: OrderData
     private var formattedDate: String = ""
+    private lateinit var binding: ActivityOrderBinding
+
+    private val channelId = "TEST_NOTIF"
+    private val notifId = 90
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_order)
+        binding = ActivityOrderBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val notifManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val title = intent.getStringExtra("title")
         val start = intent.getStringExtra("start")
@@ -56,7 +68,7 @@ class OrderActivity : AppCompatActivity() {
                 price = price.orEmpty(),
                 description = description.orEmpty(),
                 date = formattedDate,
-                imageUrl = imageUrl.orEmpty(),  // Ini sudah diinisialisasi di awal
+                imageUrl = imageUrl.orEmpty(),
                 orderId = ""
             )
 
@@ -66,13 +78,33 @@ class OrderActivity : AppCompatActivity() {
             historyOrderReference.child(orderId.orEmpty()).setValue(orderData)
 
             setResult(RESULT_OK)
+            val notifImage = BitmapFactory.decodeResource(resources, R.drawable.success_ordered)
+            val builder = NotificationCompat.Builder(this, channelId)
+                .setSmallIcon(R.drawable.success_ordered)
+                .setContentTitle("Notifku")
+                .setContentText("Ini update notifikasi")
+                .setStyle(
+                    NotificationCompat.BigPictureStyle()
+                        .bigPicture(notifImage)
+                )
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_HIGH) // Change priority to high
+            notifManager.notify(notifId, builder.build())
+
             finish()
+        }
+        with(binding) {
+            // Set OnClickListener for buttonBack
+            buttonBack.setOnClickListener{
+                onBackPressed()
+            }
         }
 
         val datePickerButton: ImageView = findViewById(R.id.datepicker_button)
         datePickerButton.setOnClickListener {
             showDatePicker()
         }
+
     }
 
     private fun showDatePicker() {

@@ -10,14 +10,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.project_uas3.Akun
+import com.example.project_uas3.database.model.Akun
 import com.example.project_uas3.activity.NavigationActivity
 import com.example.project_uas3.database.model.TravelData
-import com.example.project_uas3.recyclerview.TravelUserAdapter
+import com.example.project_uas3.adapter.TravelUserAdapter
 import com.example.project_uas3.activity.OrderActivity
 import com.example.project_uas3.database.model.Favorite
 import com.example.project_uas3.database.room.FavoriteDao
-import com.example.project_uas3.database.room.roomDb
 import com.example.project_uas3.databinding.FragmentHomeUserBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -26,7 +25,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
-import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 class HomeUserFragment : Fragment() {

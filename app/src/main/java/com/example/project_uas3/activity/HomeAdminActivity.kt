@@ -7,10 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project_uas3.R
-import com.example.project_uas3.recyclerview.TravelAdapter
+import com.example.project_uas3.adapter.TravelAdapter
 import com.example.project_uas3.database.model.TravelData
 import com.example.project_uas3.databinding.ActivityHomeAdminBinding
 import com.google.firebase.database.DataSnapshot
@@ -45,7 +46,7 @@ class HomeAdminActivity : AppCompatActivity() {
         }
 
         database = FirebaseDatabase.getInstance().getReference("Travel")
-        sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 itemList.clear()
@@ -80,13 +81,19 @@ class HomeAdminActivity : AppCompatActivity() {
         }
     }
     private fun logoutAdmin() {
-        // Clear user data from SharedPreferences
+        // Clear user session, update SharedPreferences, etc.
         val editor = sharedPreferences.edit()
-        editor.clear()
+        editor.putBoolean("isLoggedIn", false)
         editor.apply()
 
+        // Show a toast message
+        Toast.makeText(this@HomeAdminActivity, "Logout successful", Toast.LENGTH_SHORT).show()
+
+        // Redirect to the login screen or perform other actions as needed
+        // For example, you can use the following code:
         val intent = Intent(this, LoginRegisterActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
 }

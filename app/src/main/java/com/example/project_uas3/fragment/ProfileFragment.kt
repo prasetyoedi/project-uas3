@@ -10,7 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.project_uas3.Akun
+import com.example.project_uas3.database.model.Akun
 import com.example.project_uas3.activity.LoginRegisterActivity
 import com.example.project_uas3.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -41,6 +41,7 @@ class ProfileFragment : Fragment() {
         // Set click listener for btnLogout
         binding.btnLogout.setOnClickListener {
             logout()
+            requireActivity().finish()
         }
 
         // Load and display user data

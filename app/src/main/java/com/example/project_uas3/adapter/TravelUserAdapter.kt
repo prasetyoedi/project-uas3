@@ -1,11 +1,11 @@
-package com.example.project_uas3.recyclerview
+package com.example.project_uas3.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.ToggleButton
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.project_uas3.R
@@ -28,7 +28,7 @@ class TravelUserAdapter(private val filmUserList: ArrayList<TravelData>, private
         val startUser: TextView = itemView.findViewById(R.id.start_station_user)
         val endUser: TextView = itemView.findViewById(R.id.end_station_user)
         val imageUser: ImageView = itemView.findViewById(R.id.image_film_user)
-        val btnFavorite: ToggleButton = itemView.findViewById(R.id.btn_fav)
+        val btnFavorite: ImageButton = itemView.findViewById(R.id.btn_fav)
 
         init {
             itemView.setOnClickListener(this)

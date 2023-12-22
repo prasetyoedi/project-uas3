@@ -1,4 +1,4 @@
-package com.example.project_uas3
+package com.example.project_uas3.database.model
 
 data class Akun(
     var email: String ="",

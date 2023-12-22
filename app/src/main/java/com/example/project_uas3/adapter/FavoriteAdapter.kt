@@ -1,18 +1,14 @@
-package com.example.project_uas3.recyclerview
+package com.example.project_uas3.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.project_uas3.R
 import com.example.project_uas3.database.model.Favorite
-import com.example.project_uas3.database.model.TravelData
 
 class FavoriteAdapter(private val favoriteAdminList: List<Favorite>, private val onDelete: (Favorite) -> Unit) : RecyclerView.Adapter<FavoriteAdapter.FavoriteAdminViewHolder>() {
 
@@ -40,14 +36,17 @@ class FavoriteAdapter(private val favoriteAdminList: List<Favorite>, private val
         holder.btnHapus.setOnClickListener {
             onDelete(currentItem)
         }
-        // Use Glide or Picasso to load the image from the URL into the ImageView
+//        // Use Glide or Picasso to load the image from the URL into the ImageView
 //        Glide.with(holder.itemView.context)
 //            .load(currentItem)
+//            .centerCrop()
 //            .skipMemoryCache(true)
 //            .diskCacheStrategy(DiskCacheStrategy.NONE)
 //            .into(holder.image)
 
-        // Set an onClickListener for the item if needed
+//        holder.image.load(R.drawable.destination_1)
+
+//        holder.image.load("https://raw.githubusercontent.com/prasetyoedi/polines/master/assets/img/acara/1.png")
         holder.itemView.setOnClickListener {
 
         }
